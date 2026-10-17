@@ -1,0 +1,15 @@
+{
+  "id": "./",
+  "name": "NUTRIX — Daily Nutrition",
+  "short_name": "NUTRIX",
+  "description": "Daily nutrition tracker for lean bulk",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#edf3ff",
+  "theme_color": "#edf3ff",
+  "icons": [
+    {"src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}
+  ]
+}
