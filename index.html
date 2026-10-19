@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#edf3ff" />
 <title>NUTRIX — Daily Nutrition</title>
+<meta name="description" content="NUTRIX nutrition tracker with fluid liquid-glass interactions." />
 <style>
 :root{--ink:#17233d;--muted:#7b8aa6;--blue:#4d83f5;--blue2:#a8c7ff;--line:rgba(255,255,255,.86);--glass:rgba(255,255,255,.57);--shadow:0 12px 35px rgba(71,101,160,.12)}
 *{box-sizing:border-box}body{margin:0;min-height:100vh;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;background:radial-gradient(ellipse at 0% 0%,#d4e3ff 0,transparent 36%),radial-gradient(ellipse at 100% 25%,#e6dfff 0,transparent 32%),radial-gradient(ellipse at 35% 100%,#d5f1ff 0,transparent 40%),#edf2fb;background-attachment:fixed}
@@ -39,6 +40,42 @@ body.dark .macro-head span:last-child{color:#aab8d0}
 .manual-grid .field{margin:7px 0}
 .manual-toggle{width:100%;padding:12px;border:1px dashed #91a8d3;border-radius:14px;background:transparent;color:var(--blue);font-weight:650;margin:4px 0 10px}
 body.dark .manual-toggle{border-color:#536c9b}
+
+
+/* NUTRIX V3 — fluid, springy liquid-glass interaction layer */
+:root{--motion-spring:cubic-bezier(.2,.85,.25,1.25);--motion-smooth:cubic-bezier(.22,1,.36,1)}
+html{scroll-behavior:smooth}
+button,.card,.goal-item,.food-option,.date-pill,.glass-btn,.tab,.add-water,.logo,.ring,.modal{transform:translateZ(0);-webkit-tap-highlight-color:transparent}
+button{transition:transform .34s var(--motion-spring),box-shadow .28s var(--motion-smooth),filter .25s ease,background-color .25s ease}
+button:active{transform:scale(.94);filter:saturate(1.12) brightness(1.03)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #80aaff;outline-offset:3px}
+.add-btn,.primary,.tab.add span,.logo,.add-water,.date-pill,.glass-btn,.food-option,.close,.manual-toggle{position:relative;isolation:isolate;overflow:hidden}
+.add-btn:before,.primary:before,.tab.add span:before,.logo:before,.add-water:before,.date-pill:before,.glass-btn:before,.food-option:before,.close:before,.manual-toggle:before{content:"";position:absolute;inset:-1px;z-index:-1;pointer-events:none;border-radius:inherit;background:linear-gradient(115deg,transparent 18%,rgba(255,255,255,.42) 43%,rgba(255,255,255,.08) 54%,transparent 72%);transform:translateX(-130%);transition:transform .7s var(--motion-smooth)}
+.add-btn:active:before,.primary:active:before,.tab.add:active span:before,.logo:active:before,.add-water:active:before,.date-pill:active:before,.glass-btn:active:before,.food-option:active:before,.close:active:before,.manual-toggle:active:before{transform:translateX(130%)}
+.card{transition:transform .42s var(--motion-spring),box-shadow .35s var(--motion-smooth),border-color .3s ease}
+.card:active{transform:scale(.992);box-shadow:0 7px 22px rgba(71,101,160,.16),inset 0 1px 0 #ffffffc9}
+.food-option{transition:transform .34s var(--motion-spring),border-color .25s ease,box-shadow .3s ease}
+.food-option:active{transform:scale(.975)}
+.tab{transition:color .28s ease,transform .34s var(--motion-spring)}
+.tab.active{transform:translateY(-2px)}
+.tab span{transition:transform .35s var(--motion-spring),filter .25s ease}
+.tab.active span{transform:scale(1.08)}
+.tab.add:active span{transform:scale(.88) rotate(-8deg)}
+.page.active{animation:pageFloatIn .48s var(--motion-smooth) both}
+@keyframes pageFloatIn{from{opacity:0;transform:translateY(12px) scale(.992);filter:blur(3px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+.modal-back.show{animation:veilIn .28s ease both}
+.modal-back.show .modal{animation:modalSpringIn .52s var(--motion-spring) both}
+@keyframes veilIn{from{opacity:0;backdrop-filter:blur(0)}to{opacity:1;backdrop-filter:blur(8px)}}
+@keyframes modalSpringIn{0%{opacity:0;transform:translateY(34px) scale(.97)}72%{opacity:1;transform:translateY(-3px) scale(1.005)}100%{opacity:1;transform:translateY(0) scale(1)}}
+.ring{transition:background .55s var(--motion-smooth),transform .45s var(--motion-spring)}
+.ring:active{transform:scale(1.04)}
+.bar i{transition:width .65s var(--motion-smooth)}
+.toast{backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 10px 30px #1b2b4933;transition:opacity .24s ease,transform .38s var(--motion-spring)}
+.toast{transform:translate(-50%,12px) scale(.96)}.toast.show{transform:translate(-50%,0) scale(1)}
+body.dark .card:active{box-shadow:0 12px 30px #0005,inset 0 1px 0 #ffffff12}
+body.dark .add-btn:before,body.dark .primary:before,body.dark .food-option:before{background:linear-gradient(115deg,transparent 18%,rgba(255,255,255,.2) 43%,rgba(255,255,255,.04) 54%,transparent 72%)}
+@media(hover:hover){.card:hover{transform:translateY(-2px)}.add-btn:hover,.primary:hover{box-shadow:0 10px 24px #6a98f855;filter:saturate(1.08)}.food-option:hover{transform:translateY(-1px);box-shadow:0 8px 20px #8296bd18}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
 @media(max-width:360px){.calorie-layout{gap:10px}.ring{width:112px;height:112px;flex-basis:112px}.ring-inner strong{font-size:21px}.card{padding:15px}.app{padding-left:12px;padding-right:12px}}
 </style>
@@ -187,6 +224,10 @@ document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>{document.quer
 $('exportData').onclick=()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='nutrix-backup-'+dayKey()+'.json';a.click();URL.revokeObjectURL(a.href);toast('Backup disiapkan')};
 $('resetData').onclick=()=>{if(confirm('Hapus semua catatan makanan, air, dan target di perangkat ini?')){state=structuredClone(DEFAULT);saveState();render();toast('Data lokal direset')}};
 $('datePill').onclick=()=>toast('Log saat ini untuk hari ini');
+
+// Gentle tactile feedback for taps; delegated so generated food buttons are included.
+document.addEventListener('pointerdown',e=>{const b=e.target.closest('button');if(!b||b.disabled)return;b.classList.add('tap-feedback');window.setTimeout(()=>b.classList.remove('tap-feedback'),360)},{passive:true});
+
 applyTheme();render();
 </script>
 </body>
