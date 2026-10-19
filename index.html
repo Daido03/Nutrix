@@ -82,6 +82,31 @@ body.dark .add-btn:before,body.dark .primary:before,body.dark .food-option:befor
 /* V4 additions: water decrement, body-photo comparison, BMI, language */
 .add-water{flex:0 0 38px}.photo-compare{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.photo-item{min-width:0;background:#ffffff70;border:1px solid var(--line);border-radius:16px;padding:8px}.photo-item img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:11px;display:block}.photo-item small{display:block;color:var(--muted);font-size:10px;margin:6px 0;overflow-wrap:anywhere}.photo-item button{font-size:11px;color:#e06d78;background:transparent;padding:4px}.bmi-result{padding:13px;border-radius:15px;background:#ffffff70;border:1px solid var(--line);margin-top:12px;font-size:13px;line-height:1.5}.bmi-result strong{font-size:24px;display:block;margin-bottom:4px}body.dark .photo-item,body.dark .bmi-result{background:#1d2940;border-color:#35415a}
 
+
+/* NUTRIX V5: unified personal fitness workspace */
+.v5-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.v5-input{width:100%;padding:12px;border:1px solid #dce6f7;border-radius:13px;background:#fff;color:var(--ink)}.v5-action{border-radius:13px;padding:11px 13px;background:rgba(255,255,255,.65);border:1px solid var(--line);color:var(--ink);font-weight:650}.v5-list{display:grid;gap:8px}.v5-row{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 12px;border-radius:14px;background:#ffffff75;border:1px solid #ffffffaa}.v5-row small{color:var(--muted)}.coach-callout{padding:14px;border-radius:17px;background:linear-gradient(135deg,#dce9ffb8,#e8e1ffad);border:1px solid #ffffffaa;margin-top:10px}.mini-label{font-size:11px;color:var(--muted);display:block;margin:6px 0}.bottom-inner{gap:4px;overflow-x:auto;justify-content:flex-start}.tab{flex:1;min-width:57px;white-space:nowrap}.tab span{transition:transform .35s cubic-bezier(.2,.9,.25,1.4)}.tab.active span{transform:translateY(-2px) scale(1.12)}.tap-feedback{transform:scale(.94)}button{transition:transform .28s cubic-bezier(.2,.9,.25,1.4),box-shadow .25s,filter .2s}button:active{transform:scale(.94)}.page.active{animation:pageIn .32s cubic-bezier(.2,.8,.2,1)}@keyframes pageIn{from{opacity:.35;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}body.dark .v5-input{background:#111a2b;color:#e8eefb;border-color:#39465f}body.dark .v5-row{background:#1d2940;border-color:#35415a}body.dark .coach-callout{background:linear-gradient(135deg,#223958,#302943);border-color:#3a4660}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+
+/* V6 compact five-item navigation */
+.bottom{padding:8px 14px calc(8px + env(safe-area-inset-bottom));}
+.bottom-inner{max-width:520px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;overflow:visible;justify-content:initial;}
+.tab{min-width:0;flex:initial;width:100%;gap:3px;font-size:10px;padding:2px 0 1px;}
+.tab span{font-size:21px;line-height:1.2;}
+.tab small{font-size:10px;line-height:1.2;}
+.tab.add{transform:translateY(-7px);}
+.tab.add span{width:48px;height:45px;border-radius:17px;font-size:26px;box-shadow:0 8px 20px #6a98f855,inset 0 1px 0 #ffffffa8;}
+.tab.add small{margin-top:0;}
+.more-menu{padding:8px 14px;}
+.more-link{display:flex;align-items:center;gap:12px;width:100%;padding:14px 2px;text-align:left;background:transparent;color:var(--ink);border-bottom:1px solid var(--line);border-radius:0;}
+.more-link:last-child{border-bottom:0;}
+.more-link>span:nth-child(2){flex:1;display:grid;gap:4px;}
+.more-link strong{font-size:14px;}
+.more-link small{font-size:11px;color:var(--muted);}
+.more-link>b{font-size:23px;color:var(--muted);font-weight:400;}
+.more-icon{display:grid;place-items:center;width:42px;height:42px;flex:0 0 42px;border-radius:15px;background:rgba(115,156,235,.14);color:var(--blue);font-size:21px;}
+body.dark .more-link{color:var(--ink);}
+@media(max-width:360px){.bottom{padding-left:8px;padding-right:8px}.tab small{font-size:9px}.tab.add span{width:43px;height:42px;}}
+
 </style>
 </head>
 <body>
@@ -117,6 +142,38 @@ body.dark .add-btn:before,body.dark .primary:before,body.dark .food-option:befor
     <div class="card" id="bmiCard"><div class="section-title"><h3>BMI calculator</h3><span class="tiny">Estimate only</span></div><div class="manual-grid"><div class="field"><label for="bmiHeight">Tinggi (cm)</label><input id="bmiHeight" type="number" min="50" max="250" placeholder="176"></div><div class="field"><label for="bmiWeight">Berat (kg)</label><input id="bmiWeight" type="number" min="10" max="350" placeholder="65"></div></div><button class="primary" id="calcBmi" type="button">Hitung BMI</button><div id="bmiResult" class="bmi-result" aria-live="polite">Masukkan tinggi dan berat badan.</div><p class="note">BMI adalah alat skrining kasar untuk orang dewasa, bukan diagnosis dan tidak membedakan massa otot dari lemak.</p></div>
     <div class="card"><h3 style="margin:0 0 10px">Lean bulk tip</h3><p class="sub" style="margin:0">Mulai dari surplus kalori kecil dan evaluasi tren berat badan selama 2–3 minggu. Target kalori di aplikasi ini masih bisa kamu sesuaikan di Settings.</p></div>
   </section>
+
+  <section class="page" id="coachPage">
+    <h2 id="coachTitle">Smart Nutrition Coach</h2><p class="sub">Saran sederhana berdasarkan catatan hari ini, bukan diagnosis medis.</p>
+    <div class="card"><div class="section-title"><h3>Daily check-in</h3><span class="tiny">Live</span></div><div id="coachSummary" class="v5-list"></div><div id="coachAdvice" class="coach-callout"></div></div>
+    <div class="card"><div class="section-title"><h3>Today’s priorities</h3></div><p class="note">Gunakan rekomendasi sebagai panduan. Kebutuhan aktual bisa berbeda tergantung aktivitas, kesehatan, dan tren berat badan.</p><div id="coachPriorities" class="v5-list"></div></div>
+  </section>
+  <section class="page" id="bodyPage">
+    <h2>Body tracker</h2><p class="sub">Pantau tren, bukan cuma angka satu hari.</p>
+    <div class="card"><div class="section-title"><h3>Log body measurements</h3><span class="tiny">On this device</span></div><div class="v5-grid"><div><label class="mini-label" for="bodyWeight">Berat (kg)</label><input class="v5-input" id="bodyWeight" type="number" min="20" max="350" step="0.1" placeholder="65"></div><div><label class="mini-label" for="bodyWaist">Lingkar pinggang (cm)</label><input class="v5-input" id="bodyWaist" type="number" min="30" max="250" step="0.1" placeholder="78"></div></div><button class="primary" id="saveBodyLog">Simpan pengukuran</button><div id="bodyTrend" class="v5-list" style="margin-top:12px"></div><p class="note">Timbang di waktu dan kondisi yang mirip. Perubahan harian sering dipengaruhi air dan isi pencernaan.</p></div>
+  </section>
+  <section class="page" id="planPage">
+    <h2>Meal planner</h2><p class="sub">Rencana sederhana dan estimasi belanja berdasarkan harga yang lu masukkan.</p>
+    <div class="card"><div class="section-title"><h3>Weekly budget</h3></div><label class="mini-label" for="weeklyBudget">Budget mingguan (Rp)</label><input class="v5-input" id="weeklyBudget" type="number" min="0" step="10000" value="350000"><button class="primary" id="saveBudget">Simpan budget</button><p class="note">Tambahkan harga per kg/liter untuk bahan yang biasa dibeli. Ini perkiraan, bukan harga pasar otomatis.</p></div>
+    <div class="card"><div class="section-title"><h3>Shopping list</h3><span class="tiny">Custom prices</span></div><div id="priceInputs" class="v5-list"></div><button class="primary" id="savePrices">Simpan harga bahan</button><div class="coach-callout" id="budgetSummary"></div></div>
+    <div class="card"><div class="section-title"><h3>Meal plan ideas</h3></div><p class="note">Pilih ide menu lalu tambahkan bahan ke shopping list. Porsi dan nutrisi tetap perlu disesuaikan.</p><div id="mealIdeas" class="v5-list"></div></div>
+  </section>
+  <section class="page" id="workoutPage">
+    <h2>Workout tracker</h2><p class="sub">Catat latihan dan lihat progres beban/repetisi.</p>
+    <div class="card"><div class="section-title"><h3>Log workout</h3></div><div class="field"><label for="workoutExercise">Latihan</label><input class="v5-input" id="workoutExercise" maxlength="80" placeholder="Contoh: Dumbbell bench press"></div><div class="v5-grid"><div><label class="mini-label" for="workoutSets">Set</label><input class="v5-input" id="workoutSets" type="number" min="1" max="30" value="3"></div><div><label class="mini-label" for="workoutReps">Repetisi per set</label><input class="v5-input" id="workoutReps" type="number" min="1" max="100" value="10"></div><div><label class="mini-label" for="workoutWeight">Beban (kg)</label><input class="v5-input" id="workoutWeight" type="number" min="0" max="1000" step="0.5" value="10"></div><div><label class="mini-label" for="workoutDate">Tanggal</label><input class="v5-input" id="workoutDate" type="date"></div></div><button class="primary" id="saveWorkout">Simpan latihan</button></div>
+    <div class="card"><div class="section-title"><h3>Recent sessions</h3></div><div id="workoutList" class="v5-list"></div></div>
+  </section>
+
+  <section class="page" id="morePage">
+    <h2>More tools.</h2><p class="sub">Semua fitur tambahan NUTRIX ada di sini.</p>
+    <div class="card more-menu">
+      <button class="more-link" data-goto="coachPage"><span class="more-icon">✦</span><span><strong>Nutrition Coach</strong><small>Saran kalori, protein, dan hidrasi</small></span><b>›</b></button>
+      <button class="more-link" data-goto="bodyPage"><span class="more-icon">◉</span><span><strong>Body Tracker</strong><small>Berat badan dan lingkar pinggang</small></span><b>›</b></button>
+      <button class="more-link" data-goto="planPage"><span class="more-icon">▤</span><span><strong>Meal Planner & Budget</strong><small>Ide menu dan daftar belanja</small></span><b>›</b></button>
+      <button class="more-link" data-goto="settingsPage"><span class="more-icon">⚙</span><span><strong>Goals & Settings</strong><small>Target, tema, bahasa, dan backup</small></span><b>›</b></button>
+    </div>
+  </section>
+
   <section class="page" id="settingsPage">
     <h2>Your targets.</h2><p class="sub">Sesuaikan kebutuhan harianmu.</p>
     <div class="card">
@@ -130,14 +187,15 @@ body.dark .add-btn:before,body.dark .primary:before,body.dark .food-option:befor
     </div>
     <div class="card"><div class="theme-toggle"><div><h3 style="margin:0 0 5px">Appearance</h3><p class="sub" style="margin:0">Pilih tampilan yang nyaman buat mata.</p></div><button class="glass-btn" id="themeToggle" type="button">🌙 Dark mode</button></div></div>
     <div class="card"><div class="theme-toggle"><div><h3 style="margin:0 0 5px">Language / Bahasa</h3><p class="sub" style="margin:0">Pilih bahasa aplikasi.</p></div><button class="glass-btn" id="languageToggle" type="button">🇮🇩 Indonesia</button></div></div>
-    <div class="card"><div class="section-title"><h3>Local data</h3><span class="tiny">On this device</span></div><p class="sub" style="margin-bottom:12px">Catatan disimpan di browser perangkat ini menggunakan localStorage. Data tidak otomatis tersinkron ke perangkat lain.</p><button class="glass-btn" id="exportData">Export backup JSON</button> <button class="glass-btn" id="resetData">Reset data</button></div>
+    <div class="card"><div class="section-title"><h3>Local data</h3><span class="tiny">On this device</span></div><p class="sub" style="margin-bottom:12px">Catatan disimpan di browser perangkat ini menggunakan localStorage. Data tidak otomatis tersinkron ke perangkat lain.</p><button class="glass-btn" id="exportData">Export backup JSON</button> <button class="glass-btn" id="importDataBtn">Import backup JSON</button><input id="importDataFile" type="file" accept="application/json,.json" hidden> <button class="glass-btn" id="resetData">Reset data</button></div>
   </section>
 </div>
 <nav class="bottom"><div class="bottom-inner">
-<button class="tab active" data-page="homePage"><span>⌂</span>Home</button>
-<button class="tab" data-page="progressPage"><span>▥</span>Progress</button>
-<button class="tab add" id="navAdd"><span>＋</span>Add</button>
-<button class="tab" data-page="settingsPage"><span>⚙</span>Goals</button>
+<button class="tab active" data-page="homePage"><span>⌂</span><small>Home</small></button>
+<button class="tab" data-page="progressPage"><span>▥</span><small>Progress</small></button>
+<button class="tab add" id="navAdd" aria-label="Add food"><span>＋</span><small>Add</small></button>
+<button class="tab" data-page="workoutPage"><span>↗</span><small>Train</small></button>
+<button class="tab" data-page="morePage"><span>☰</span><small>More</small></button>
 </div></nav>
 <div class="modal-back" id="foodModal"><div class="modal">
   <div class="modal-head"><h3>Add food</h3><button class="close" id="closeFood">×</button></div>
@@ -179,9 +237,9 @@ const DB=[
 {id:'peanut',name:'Kacang tanah',emoji:'🥜',unit:'g',kcal:567,p:25.8,c:16.1,f:49.2}
 ];
 const DEFAULT={goals:{kcal:2500,p:150,c:300,f:70,water:3000},days:{}};
-let state=loadState(),selected=null;state.progressPhotos=state.progressPhotos||[];state.language=state.language||'id';
+let state=loadState(),selected=null;state.progressPhotos=state.progressPhotos||[];state.bodyLogs=state.bodyLogs||[];state.workouts=state.workouts||[];state.budget=state.budget||{weekly:350000,prices:{}};state.mealPlan=state.mealPlan||[];state.language=state.language||'id';
 const $=id=>document.getElementById(id);
-function loadState(){try{const saved=JSON.parse(localStorage.getItem('nutrix-v1')||'{}');return {...DEFAULT,...saved,goals:{...DEFAULT.goals,...(saved.goals||{})},days:saved.days||{},customFoods:saved.customFoods||[],theme:saved.theme||'light',language:saved.language||'id',progressPhotos:saved.progressPhotos||[]}}catch(e){return {...structuredClone(DEFAULT),customFoods:[],theme:'light',language:'id',progressPhotos:[]}}}
+function loadState(){try{const saved=JSON.parse(localStorage.getItem('nutrix-v1')||'{}');return {...DEFAULT,...saved,goals:{...DEFAULT.goals,...(saved.goals||{})},days:saved.days||{},customFoods:saved.customFoods||[],theme:saved.theme||'light',language:saved.language||'id',progressPhotos:saved.progressPhotos||[],bodyLogs:saved.bodyLogs||[],workouts:saved.workouts||[],budget:saved.budget||{weekly:350000,prices:{}},mealPlan:saved.mealPlan||[]} }catch(e){return {...structuredClone(DEFAULT),customFoods:[],theme:'light',language:'id',progressPhotos:[]}}}
 function saveState(){localStorage.setItem('nutrix-v1',JSON.stringify(state))}
 function dayKey(d=new Date()){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
 function today(){const k=dayKey();if(!state.days[k])state.days[k]={foods:[],water:0};return state.days[k]}
@@ -197,7 +255,7 @@ function render(){
  $('remainingText').innerHTML=t.kcal>=g.kcal?`Target ${fmt(g.kcal)} kcal · <b>${fmt(t.kcal-g.kcal)} kcal</b> di atas target`:`Sisa <b>${fmt(g.kcal-t.kcal)} kcal</b> dari target ${fmt(g.kcal)} kcal`;
  $('water').textContent=fmt(d.water);$('waterGoal').textContent=fmt(g.water);$('waterBar').style.width=Math.min(100,d.water/g.water*100)+'%';
  $('todayLabel').textContent=new Date().toLocaleDateString('id-ID',{day:'numeric',month:'short'});
- renderMeals();renderProgress();syncGoals();renderPhotos();
+ renderMeals();renderProgress();syncGoals();renderPhotos();if(typeof renderV5==='function')renderV5();
 }
 function renderMeals(){
  const names=['Breakfast','Lunch','Dinner','Snacks'];const d=today();$('mealList').innerHTML='';
@@ -235,7 +293,9 @@ $('languageToggle').onclick=()=>{state.language=state.language==='en'?'id':'en';
 $('calcBmi').onclick=()=>{const h=Number($('bmiHeight').value)/100,w=Number($('bmiWeight').value);if(!Number.isFinite(h)||h<.5||h>2.5||!Number.isFinite(w)||w<10||w>350){$('bmiResult').textContent=state.language==='en'?'Enter a valid height and weight.':'Masukkan tinggi dan berat yang valid.';return}const bmi=w/(h*h);let cat=bmi<18.5?'Underweight':bmi<25?'Normal range':bmi<30?'Overweight':'Obesity';let idcat=bmi<18.5?'Berat badan kurang':bmi<25?'Rentang normal':bmi<30?'Berat badan berlebih':'Obesitas';$('bmiResult').innerHTML=`<strong>${bmi.toFixed(1)}</strong>${state.language==='en'?cat:idcat}`};
 $('saveProgressPhoto').onclick=()=>{const file=$('progressPhotoInput').files[0];if(!file){toast(state.language==='en'?'Choose a photo first':'Pilih foto dulu');return}if(!file.type.startsWith('image/')){toast('File harus berupa gambar');return}const reader=new FileReader();reader.onload=()=>{const img=new Image();img.onload=()=>{const canvas=document.createElement('canvas');const max=900;const scale=Math.min(1,max/Math.max(img.width,img.height));canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);const data=canvas.toDataURL('image/jpeg',.72);state.progressPhotos=state.progressPhotos||[];state.progressPhotos.push({id:'photo-'+Date.now(),date:new Date().toLocaleDateString(state.language==='en'?'en-US':'id-ID'),data});try{saveState();renderPhotos();$('progressPhotoInput').value='';toast(state.language==='en'?'Progress photo saved':'Foto progres tersimpan')}catch(e){state.progressPhotos.pop();toast(state.language==='en'?'Storage is full; remove older photos':'Penyimpanan penuh; hapus foto lama')}};img.src=reader.result};reader.readAsDataURL(file)};
 $('saveGoals').onclick=()=>{const g={kcal:Number($('calGoalInput').value),p:Number($('proGoalInput').value),c:Number($('carbGoalInput').value),f:Number($('fatGoalInput').value),water:Number($('waterGoalInput').value)};if(Object.values(g).some(v=>!Number.isFinite(v)||v<=0)){toast('Isi semua target dengan angka valid');return}state.goals=g;saveState();render();toast('Target harian tersimpan ✓')};
-document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-page]').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===b.dataset.page))});
+function showPage(pageId,navId){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===pageId));document.querySelectorAll('.bottom [data-page]').forEach(x=>x.classList.toggle('active',x.dataset.page===(navId||pageId)));if(pageId==='morePage')document.querySelector('.bottom [data-page=\"morePage\"]')?.classList.add('active')}
+document.querySelectorAll('.bottom [data-page]').forEach(b=>b.onclick=()=>showPage(b.dataset.page));
+document.querySelectorAll('[data-goto]').forEach(b=>b.onclick=()=>showPage(b.dataset.goto,'morePage'));
 $('exportData').onclick=()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='nutrix-backup-'+dayKey()+'.json';a.click();URL.revokeObjectURL(a.href);toast('Backup disiapkan')};
 $('resetData').onclick=()=>{if(confirm('Hapus semua catatan makanan, air, dan target di perangkat ini?')){state=structuredClone(DEFAULT);saveState();render();toast('Data lokal direset')}};
 $('datePill').onclick=()=>toast('Log saat ini untuk hari ini');
@@ -243,8 +303,23 @@ $('datePill').onclick=()=>toast('Log saat ini untuk hari ini');
 // Gentle tactile feedback for taps; delegated so generated food buttons are included.
 document.addEventListener('pointerdown',e=>{const b=e.target.closest('button');if(!b||b.disabled)return;b.classList.add('tap-feedback');window.setTimeout(()=>b.classList.remove('tap-feedback'),360)},{passive:true});
 
-applyTheme();render();setLanguage();
-if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(()=>{})); }
+
+// V5 modules: coach, body measurements, meal budget, workout log, robust backup restore.
+function todayISO(){return dayKey()}
+function renderCoach(){if(!$('coachSummary'))return;const t=totals(),g=state.goals,en=state.language==='en';const items=[[en?'Calories':'Kalori',fmt(t.kcal)+' / '+fmt(g.kcal)+' kcal'],['Protein',n(t.p)+' / '+g.p+' g'],[en?'Water':'Air minum',fmt(today().water)+' / '+fmt(g.water)+' ml']];$('coachSummary').innerHTML=items.map(x=>`<div class="v5-row"><span>${x[0]}</span><strong>${x[1]}</strong></div>`).join('');let advice=t.kcal<g.kcal*.65?(en?'Energy intake is still below your daily target. Plan a balanced meal.':'Asupan energi masih cukup jauh dari target. Rencanakan makan seimbang berikutnya.'):t.kcal>g.kcal*1.15?(en?'You are above today’s calorie target; no need to compensate aggressively.':'Kalori sudah melewati target. Nggak perlu mengompensasi secara ekstrem; lanjutkan pola normal.'): (en?'You are around your calorie target. Keep logging consistently.':'Asupan kalori sudah mendekati target. Lanjutkan pencatatan secara konsisten.');$('coachAdvice').textContent=advice;const p=[];if(t.p<g.p)p.push((en?'Protein remaining: ':'Sisa protein: ')+n(g.p-t.p)+' g');if(today().water<g.water)p.push((en?'Water remaining: ':'Sisa target air: ')+fmt(g.water-today().water)+' ml');if(t.kcal<g.kcal)p.push((en?'Energy remaining: ':'Sisa kalori: ')+fmt(g.kcal-t.kcal)+' kcal');$('coachPriorities').innerHTML=(p.length?p:[en?'Daily targets reached. Check how you feel and keep the routine sustainable.':'Target utama tercapai. Perhatikan rasa lapar, energi, dan jaga rutinitas tetap realistis.']).map(x=>`<div class="v5-row">${x}</div>`).join('')}
+function renderBody(){if(!$('bodyTrend'))return;const logs=(state.bodyLogs||[]).slice().reverse();$('bodyTrend').innerHTML=logs.length?logs.slice(0,8).map(x=>`<div class="v5-row"><span><strong>${x.weight?x.weight+' kg':'—'}</strong> · ${x.waist?x.waist+' cm waist':'—'}<br><small>${x.date}</small></span><button class="v5-action" data-body-delete="${x.id}">Hapus</button></div>`).join(''):'<p class="note">Belum ada pengukuran. Catat berat atau lingkar pinggang di atas.</p>';document.querySelectorAll('[data-body-delete]').forEach(b=>b.onclick=()=>{state.bodyLogs=state.bodyLogs.filter(x=>x.id!==b.dataset.bodyDelete);saveState();renderBody()})}
+function renderBudget(){if(!$('priceInputs'))return;const items=[['chicken','Dada ayam (harga/kg)', 'kg'],['egg','Telur (harga/kg)','kg'],['rice','Beras (harga/kg)','kg'],['tempe','Tempe (harga/papan)','papan'],['milk','Susu UHT (harga/liter)','liter'],['banana','Pisang (harga/kg)','kg'],['oats','Oat (harga/kg)','kg'],['sweetpotato','Ubi (harga/kg)','kg']];$('weeklyBudget').value=state.budget.weekly||350000;$('priceInputs').innerHTML=items.map(([id,label,unit])=>`<div><label class="mini-label" for="price-${id}">${label}</label><input class="v5-input" type="number" min="0" step="500" id="price-${id}" data-price="${id}" placeholder="Rp per ${unit}"></div>`).join('');items.forEach(([id])=>{const el=$('price-'+id);if(state.budget.prices[id]!=null)el.value=state.budget.prices[id]});const ideas=[['Lean bulk simple','Dada ayam, nasi, telur, tempe'],['Sarapan praktis','Roti gandum, telur, susu'],['Snack energi','Pisang, oat, susu']];$('mealIdeas').innerHTML=ideas.map(([name,desc])=>`<div class="v5-row"><div><strong>${name}</strong><br><small>${desc}</small></div><button class="v5-action" data-idea="${name}">Pakai ide</button></div>`).join('');document.querySelectorAll('[data-idea]').forEach(b=>b.onclick=()=>{const map={'Lean bulk simple':['chicken','rice','egg','tempe'],'Sarapan praktis':['bread','egg','milk'],'Snack energi':['banana','oats','milk']};const names=map[b.dataset.idea].map(id=>DB.find(f=>f.id===id)?.name).filter(Boolean);$('budgetSummary').textContent=(state.language==='en'?'Shopping idea: ':'Ide belanja: ')+names.join(', ')+'. Masukkan harga sendiri untuk estimasi budget.'});updateBudgetSummary()}
+function updateBudgetSummary(){if(!$('budgetSummary'))return;const prices=state.budget.prices||{};const known=Object.values(prices).filter(v=>Number(v)>0).length;const total=Object.values(prices).reduce((s,v)=>s+(Number(v)||0),0);$('budgetSummary').textContent=known?(state.language==='en'?`${known} prices saved. Sum of entered unit prices: Rp ${fmt(total)}. Compare with weekly budget Rp ${fmt(state.budget.weekly)}; this is not an exact weekly total until quantities are planned.`:`${known} harga tersimpan. Jumlah harga satuan yang diinput: Rp ${fmt(total)}. Bandingkan dengan budget mingguan Rp ${fmt(state.budget.weekly)}; ini belum total belanja pasti sebelum jumlah bahan ditentukan.`):(state.language==='en'?'Enter local ingredient prices to estimate your budget.':'Masukkan harga bahan sesuai toko langganan untuk memperkirakan budget.')}
+function renderWorkouts(){if(!$('workoutList'))return;const arr=(state.workouts||[]).slice().reverse();$('workoutList').innerHTML=arr.length?arr.slice(0,20).map(x=>`<div class="v5-row"><span><strong>${x.exercise}</strong><br><small>${x.date} · ${x.sets} × ${x.reps} reps · ${x.weight} kg</small></span><button class="v5-action" data-workout-delete="${x.id}">Hapus</button></div>`).join(''):'<p class="note">Belum ada latihan yang dicatat.</p>';document.querySelectorAll('[data-workout-delete]').forEach(b=>b.onclick=()=>{state.workouts=state.workouts.filter(x=>x.id!==b.dataset.workoutDelete);saveState();renderWorkouts()})}
+function renderV5(){renderCoach();renderBody();renderBudget();renderWorkouts()}
+$('saveBodyLog').onclick=()=>{const weight=$('bodyWeight').value===''?null:Number($('bodyWeight').value),waist=$('bodyWaist').value===''?null:Number($('bodyWaist').value);if(weight===null&&waist===null){toast('Isi berat atau lingkar pinggang dulu');return}if((weight!==null&&(!Number.isFinite(weight)||weight<20||weight>350))||(waist!==null&&(!Number.isFinite(waist)||waist<30||waist>250))){toast('Periksa angka pengukuran');return}state.bodyLogs.push({id:'body-'+Date.now(),date:todayISO(),weight,waist});saveState();$('bodyWeight').value='';$('bodyWaist').value='';renderBody();toast('Pengukuran tersimpan ✓')};
+$('saveBudget').onclick=()=>{const v=Number($('weeklyBudget').value);if(!Number.isFinite(v)||v<0||v>100000000){toast('Budget tidak valid');return}state.budget.weekly=v;saveState();updateBudgetSummary();toast('Budget disimpan')};
+$('savePrices').onclick=()=>{state.budget.prices=state.budget.prices||{};document.querySelectorAll('[data-price]').forEach(el=>{const v=el.value===''?null:Number(el.value);if(v!==null&&(!Number.isFinite(v)||v<0||v>100000000)){return}if(v===null)delete state.budget.prices[el.dataset.price];else state.budget.prices[el.dataset.price]=v});saveState();updateBudgetSummary();toast('Harga bahan disimpan')};
+$('workoutDate').value=todayISO();$('saveWorkout').onclick=()=>{const exercise=$('workoutExercise').value.trim(),sets=Number($('workoutSets').value),reps=Number($('workoutReps').value),weight=Number($('workoutWeight').value),date=$('workoutDate').value||todayISO();if(!exercise||sets<1||sets>30||reps<1||reps>100||weight<0||weight>1000||![sets,reps,weight].every(Number.isFinite)){toast('Periksa data latihan');return}state.workouts.push({id:'workout-'+Date.now(),exercise,sets,reps,weight,date});saveState();$('workoutExercise').value='';renderWorkouts();toast('Latihan tersimpan ✓')};
+$('importDataBtn').onclick=()=>$('importDataFile').click();$('importDataFile').onchange=()=>{const file=$('importDataFile').files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const incoming=JSON.parse(reader.result);if(!incoming||typeof incoming!=='object'||!incoming.goals||!incoming.days)throw new Error('invalid');if(!confirm('Import akan mengganti data lokal saat ini. Pastikan sudah export backup. Lanjutkan?'))return;state={...state,...incoming,goals:{...DEFAULT.goals,...incoming.goals},days:incoming.days||{},customFoods:incoming.customFoods||[],progressPhotos:incoming.progressPhotos||[],bodyLogs:incoming.bodyLogs||[],workouts:incoming.workouts||[],budget:incoming.budget||{weekly:350000,prices:{}},mealPlan:incoming.mealPlan||[]};saveState();render();renderV5();applyTheme();setLanguage();toast('Backup berhasil diimpor ✓')}catch(e){toast('File backup tidak valid atau tidak cocok')}};reader.readAsText(file)};
+
+applyTheme();render();setLanguage();renderV5();
+if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=6').catch(()=>{})); }
 </script>
 </body>
 </html>
